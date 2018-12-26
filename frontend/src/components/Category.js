@@ -10,7 +10,6 @@ export default class Category extends React.Component {
   render() {
     const { match } = this.props
     const category = match.params.categoryPath
-    // console.log(category)
 
     return (
       <React.Fragment>

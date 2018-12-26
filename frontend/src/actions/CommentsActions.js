@@ -29,7 +29,7 @@ export const fetchCommentsFailure = error => ({
   payload: { error }
 });
 
-export function fetchComments(postId: string) {
+export function fetchComments(postId) {
   return dispatch => {
     dispatch(fetchCommentsBegin());
     return fetch( `${API_ENDPOINT}/posts/${postId}/comments`, { headers: HEADERS })

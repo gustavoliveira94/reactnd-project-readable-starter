@@ -100,7 +100,6 @@ export const newPostFailure = error => ({
 })
 
 export function newPost(formData, callback) {
-  // console.log('formData', formData)
   const { title, body, author, category } = formData
 
   const data = {
@@ -128,7 +127,7 @@ export function newPost(formData, callback) {
 }
 
 // Vote
-export function votePost(id: string, vote: string) {
+export function votePost(id, vote) {
 
   const data = {
     option: vote

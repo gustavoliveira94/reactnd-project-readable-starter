@@ -11,8 +11,6 @@ class NewPost extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-
-    // TODO: validate form inputs
     
     const formData = {}
     for (const field in this.refs) {
@@ -24,7 +22,6 @@ class NewPost extends React.Component {
   }
 
   onPostSuccess = (response) => {
-    // console.log('onPostSuccess', response)
     this.props.history.push(`/post/${response.id}`);
   }
 

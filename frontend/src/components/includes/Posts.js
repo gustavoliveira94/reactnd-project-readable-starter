@@ -19,7 +19,6 @@ class Posts extends React.Component {
   render() {
     const { sortBy } = this
     const { posts, error, loading, category, sortByCriteria } = this.props
-    // const sortedPosts = _.orderBy(posts, 'timestamp', 'desc')
 
     const filteredPosts = category
       ? posts.filter( p => p.category === category && p.deleted === false )
@@ -66,8 +65,6 @@ class Posts extends React.Component {
 }
 
 function mapStateToProps ({ postsReducer, ownProps }) {
-  // console.log('postsReducer', postsReducer)
-  // console.log(ownProps)
   return {
     posts: postsReducer.items,
     sortByCriteria: postsReducer.sortByCriteria,

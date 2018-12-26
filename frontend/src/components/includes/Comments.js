@@ -70,7 +70,6 @@ class Comments extends React.Component {
 }
 
 function mapStateToProps ({ commentsReducer }) {
-  // console.log(commentsReducer)
   return {
     comments: commentsReducer.items,
     loading: commentsReducer.loading,
