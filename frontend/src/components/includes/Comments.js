@@ -61,7 +61,7 @@ class Comments extends React.Component {
               <label>Body</label>
               <textarea name="body" ref="body" className="form-control"/>
             </div>
-            <button type="submit" className="btn btn-default">Comment</button>
+            <button type="submit" className="btn btn-default comment">Comment</button>
           </form>
         </div>
       </React.Fragment>

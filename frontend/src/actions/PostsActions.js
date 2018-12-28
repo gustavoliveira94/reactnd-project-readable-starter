@@ -23,6 +23,10 @@ export const NEW_POST_BEGIN = 'NEW_POST_BEGIN'
 export const NEW_POST_SUCCESS = 'NEW_POST_SUCCESS'
 export const NEW_POST_FAILURE = 'NEW_POST_FAILURE'
 
+// Delete post
+export const DELETE_POST = 'DELETE_POST'
+
+
 export const fetchPostsBegin = () => ({
   type: FETCH_POSTS_BEGIN
 })
@@ -40,7 +44,7 @@ export const fetchPostsFailure = error => ({
 export function fetchPosts() {
   return dispatch => {
     dispatch(fetchPostsBegin())
-    return fetch( API_ENDPOINT + '/posts', { headers: HEADERS })
+    return fetch(API_ENDPOINT + '/posts', { headers: HEADERS })
       .then(handleErrors)
       .then(res => res.json())
       .then(json => {
@@ -73,7 +77,7 @@ export const fetchSinglePostFailure = error => ({
 export function fetchPostById(id) {
   return dispatch => {
     dispatch(fetchSinglePostBegin())
-    return fetch( `${API_ENDPOINT}/posts/${id}`, { headers: HEADERS })
+    return fetch(`${API_ENDPOINT}/posts/${id}`, { headers: HEADERS })
       .then(handleErrors)
       .then(res => res.json())
       .then(json => {
@@ -103,15 +107,15 @@ export function newPost(formData, callback) {
   const { title, body, author, category } = formData
 
   const data = {
-      id: guid(),
-      timestamp: Date.now(),
-      title,
-      body,
-      author,
-      category,
-      voteScore: 0,
-      deleted: false,
-      commentCount: 0
+    id: guid(),
+    timestamp: Date.now(),
+    title,
+    body,
+    author,
+    category,
+    voteScore: 0,
+    deleted: false,
+    commentCount: 0
   }
 
   return dispatch => {
@@ -122,7 +126,7 @@ export function newPost(formData, callback) {
         dispatch(newPostSuccess(res.data))
       })
       .catch(error => dispatch(newPostFailure(error)))
-    
+
   }
 }
 
@@ -141,4 +145,14 @@ export function votePost(id, vote) {
       })
       .catch(error => dispatch(fetchSinglePostFailure(error)))
   }
+}
+
+
+//Delete
+
+export function deletePost(id) {
+  return {
+      type: DELETE_POST,
+      id
+  };
 }

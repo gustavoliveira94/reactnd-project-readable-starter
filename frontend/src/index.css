@@ -158,3 +158,12 @@ h6, .h6 {
 .list-unstyled a:hover {
   color: #000;
 }
+
+.comment {
+  background-color: #ff6307 !important;
+  color: #fff !important;
+}
+
+.btn-group a{
+  margin: 0 10px;
+}

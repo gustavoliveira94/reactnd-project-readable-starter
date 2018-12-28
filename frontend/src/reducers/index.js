@@ -15,13 +15,14 @@ import {
   NEW_POST_BEGIN,
   NEW_POST_SUCCESS,
   NEW_POST_FAILURE,
+  DELETE_POST,
 
   FETCH_COMMENTS_BEGIN,
   FETCH_COMMENTS_SUCCESS,
   FETCH_COMMENTS_FAILURE,
   POST_COMMENT_BEGIN,
   POST_COMMENT_SUCCESS,
-  POST_COMMENT_FAILURE
+  POST_COMMENT_FAILURE,
 } from '../actions'
 
 const initialState = {
@@ -31,7 +32,7 @@ const initialState = {
 };
 
 function categoriesReducer(state = initialState, action) {
-  switch(action.type) {
+  switch (action.type) {
     case FETCH_CATEGORIES_BEGIN:
       return {
         ...state,
@@ -60,7 +61,7 @@ function categoriesReducer(state = initialState, action) {
 }
 
 function postsReducer(state = initialState, action) {
-  switch(action.type) {
+  switch (action.type) {
     case FETCH_POSTS_BEGIN:
       return {
         ...state,
@@ -88,22 +89,22 @@ function postsReducer(state = initialState, action) {
         ...state,
         loading: true,
         error: null
-    }
+      }
 
     case NEW_POST_SUCCESS:
       return {
         ...state,
-        loading:false,
+        loading: false,
         items: [...state.items, action.payload.data]
-    }
+      }
 
     case NEW_POST_FAILURE:
       return {
         ...state,
-        loading:false,
+        loading: false,
         error: action.payload.error,
         items: []
-    }
+      }
 
     case SORT_POSTS:
       return {
@@ -123,7 +124,7 @@ const singlePostInitialState = {
 };
 
 function singlePostReducer(state = singlePostInitialState, action) {
-  switch(action.type) {
+  switch (action.type) {
     case FETCH_SINGLE_POST_BEGIN:
       return {
         ...state,
@@ -152,7 +153,7 @@ function singlePostReducer(state = singlePostInitialState, action) {
 }
 
 function commentsReducer(state = initialState, action) {
-  switch(action.type) {
+  switch (action.type) {
     case FETCH_COMMENTS_BEGIN:
       return {
         ...state,
@@ -180,22 +181,22 @@ function commentsReducer(state = initialState, action) {
         ...state,
         loading: true,
         error: null
-    }
+      }
 
     case POST_COMMENT_SUCCESS:
       return {
         ...state,
-        loading:false,
+        loading: false,
         items: [...state.items, action.payload.data]
-    }
+      }
 
     case POST_COMMENT_FAILURE:
       return {
         ...state,
-        loading:false,
+        loading: false,
         error: action.payload.error,
         items: []
-    }
+      }
 
     default:
       return state;

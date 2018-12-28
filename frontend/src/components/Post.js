@@ -6,11 +6,14 @@ import Loading from './includes/Loading'
 import Categories from './includes/Categories'
 import Header from '../components/includes/Header'
 import Nav from '../components/includes/Nav'
-import { fetchPostById, votePost } from '../actions'
-
+import { fetchPostById, votePost, deletePost } from '../actions'
 import Comments from './includes/Comments'
 
 class Post extends React.Component {
+
+  state = {
+
+  }
 
   componentDidMount() {
     const { match } = this.props
@@ -48,6 +51,11 @@ class Post extends React.Component {
                     <button type="button" onClick={ () => vote('downVote') } className="btn btn-default"><i className="fa fa-caret-down" /></button>
                     <button type="button" disabled className="btn btn-default">{post.voteScore}</button>
                     <button type="button" onClick={ () => vote('upVote') } className="btn btn-default"><i className="fa fa-caret-up" /></button>
+                  </div>
+                  <div className="btn-group">
+                    <label>Comments: {post.commentCount}</label>
+                    <a href="#">Editar</a>
+                    <a href="#">Excluir</a>
                   </div>
                   <hr/>
                   { post.id && <Comments postId={ post.id } /> }

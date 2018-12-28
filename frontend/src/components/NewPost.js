@@ -22,7 +22,7 @@ class NewPost extends React.Component {
   }
 
   onPostSuccess = (response) => {
-    this.props.history.push(`/post/${response.id}`);
+    this.props.history.push(`/post/${response.category}/${response.id}`);
   }
 
 
@@ -62,7 +62,7 @@ class NewPost extends React.Component {
                   )}
                   </select>
                 </div>
-                <button type="submit" className="btn btn-default">Post</button>
+                <button type="submit" className="btn btn-default comment">Post</button>
               </form>
             </div>
             <div className="col-sm-3 col-sm-offset-1 blog-sidebar">
