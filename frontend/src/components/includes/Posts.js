@@ -54,7 +54,7 @@ class Posts extends React.Component {
 
         { sortedPosts.map(post =>  
           <div className="blog-post" key={ `post-${post.id}` }>
-            <Link to={ "/post/" + post.id } className="blog-post-title">{post.title}</Link>
+            <Link to={ "/post/" + post.category + "/" + post.id } className="blog-post-title">{post.title}</Link>
             <p className="text-muted"> {post.voteScore} votes | by {post.author} on {moment(post.timestamp).format("MM/DD/YYYY")} | {post.commentCount} comments</p>
             <hr/>
           </div>
@@ -68,6 +68,8 @@ function mapStateToProps ({ postsReducer, ownProps }) {
   return {
     posts: postsReducer.items,
     sortByCriteria: postsReducer.sortByCriteria,
+    loading: postsReducer.loading,
+    error: postsReducer.error
   }
 }
 

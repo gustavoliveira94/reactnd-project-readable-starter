@@ -12,10 +12,10 @@ class MainContainer extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <Route exact path="/" component={ Home } />
-        <Route exact path="/newpost" component={ NewPost } />
-        <Route exact path="/post/:postId" component={ Post } />
-        <Route exact path="/category/:categoryPath" component={ Category } />
+        <Route exact path="/" component={Home} />
+        <Route exact path="/newpost" component={NewPost} />
+        <Route exact path="/post/:categoryPath/:postId" component={Post} />
+        <Route exact path="/category/:categoryPath" component={Category} />
       </React.Fragment>
     )
   }
