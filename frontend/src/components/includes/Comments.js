@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import * as moment from 'moment-timezone'
-import { fetchComments, postComment } from '../../actions'
+import { fetchComments, postComment, deleteComment } from '../../actions'
 import Loading from './Loading'
 
 class Comments extends React.Component {
@@ -26,6 +26,10 @@ class Comments extends React.Component {
     console.log('onPostSuccess')
   }
 
+  deleteComment = (id) => {
+    this.props.deleteComment(id)
+  }
+
   render() {
     const { comments, error, loading } = this.props
 
@@ -46,6 +50,8 @@ class Comments extends React.Component {
                 <h4 className="media-heading text-uppercase reviews">{item.author}</h4>
                 <p>{item.body}</p>
                 <div className="text-muted">Commented on {moment(item.timestamp).format("MM/DD/YYYY")}</div>
+                <a className="editar" href="#">Editar</a>
+                <a href="#" onClick={() => this.deleteComment(item.id)}>Excluir</a>
               </div>
             )}
           </div>
@@ -80,6 +86,7 @@ function mapStateToProps ({ commentsReducer }) {
 function mapDispatchToProps (dispatch) {
   return {
     fetchComments: (postId) => dispatch(fetchComments(postId)),
+    deleteComment: (postId) => dispatch(deleteComment(postId)),
     postComment: (data, postId, callback) => dispatch(postComment(data, postId, callback))
   }
 }

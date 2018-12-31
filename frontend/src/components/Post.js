@@ -11,10 +11,6 @@ import Comments from './includes/Comments'
 
 class Post extends React.Component {
 
-  state = {
-
-  }
-
   componentDidMount() {
     const { match } = this.props
     this.props.fetchPostById( match.params.postId)
@@ -25,9 +21,14 @@ class Post extends React.Component {
     this.props.votePost(match.params.postId, value)
   }
 
+  deletePost = (id) => {
+    const { match } = this.props
+    this.props.deletePost(match.params.postId)
+  }
+
   render() {
     const { post, error, loading } = this.props
-    const { vote } = this
+    const { vote, deletePost } = this
 
     if (error) { return <div>Error! {error.message}</div>; }
 
@@ -55,11 +56,11 @@ class Post extends React.Component {
                   <div className="btn-group">
                     <label>Comments: {post.commentCount}</label>
                     <a href="#">Editar</a>
-                    <a href="#">Excluir</a>
+                    <a href="/" onClick={() => deletePost(post.id)}>Excluir</a>
                   </div>
                   <hr/>
                   { post.id && <Comments postId={ post.id } /> }
-                </React.Fragment>                
+                </React.Fragment>
               }
             </div>
             <div className="col-sm-3 col-sm-offset-1 blog-sidebar">
@@ -83,6 +84,7 @@ function mapStateToProps ({ singlePostReducer }) {
 function mapDispatchToProps (dispatch) {
   return {
     fetchPostById: (postId) => dispatch(fetchPostById(postId)),
+    deletePost: (postId) => dispatch(deletePost(postId)),
     votePost: (postId, vote) => dispatch(votePost(postId, vote))
   }
 }

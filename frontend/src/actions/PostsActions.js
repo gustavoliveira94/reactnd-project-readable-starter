@@ -150,9 +150,24 @@ export function votePost(id, vote) {
 
 //Delete
 
-export function deletePost(id) {
+export const deletePostSuccess = id => {
   return {
-      type: DELETE_POST,
-      id
-  };
+    type: DELETE_POST,
+    payload: {
+      id,
+      deleted: true
+    }
+  }
 }
+
+export function deletePost(id) {
+  return (dispatch) => {
+    return axios.delete(`${API_ENDPOINT}/posts/${id}`)
+      .then(response => {
+        dispatch(deletePostSuccess(response.data))
+      })
+      .catch(error => {
+        throw(error);
+      });
+  };
+};

@@ -16,6 +16,7 @@ import {
   NEW_POST_SUCCESS,
   NEW_POST_FAILURE,
   DELETE_POST,
+  DELETE_COMMENT,
 
   FETCH_COMMENTS_BEGIN,
   FETCH_COMMENTS_SUCCESS,
@@ -83,6 +84,9 @@ function postsReducer(state = initialState, action) {
         error: action.payload.error,
         items: []
       };
+
+    case DELETE_POST:
+      return state.items.post !== action.payload.post
 
     case NEW_POST_BEGIN:
       return {
@@ -154,6 +158,9 @@ function singlePostReducer(state = singlePostInitialState, action) {
 
 function commentsReducer(state = initialState, action) {
   switch (action.type) {
+    case DELETE_COMMENT:
+      return state.items.comments !== action.payload.comments
+
     case FETCH_COMMENTS_BEGIN:
       return {
         ...state,
