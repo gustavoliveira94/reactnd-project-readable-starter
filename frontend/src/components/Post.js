@@ -55,7 +55,7 @@ class Post extends React.Component {
                   </div>
                   <div className="btn-group">
                     <label>Comments: {post.commentCount}</label>
-                    <a href="#">Editar</a>
+                    <Link to="/updatepost">Editar</Link>
                     <a href="/" onClick={() => deletePost(post.id)}>Excluir</a>
                   </div>
                   <hr/>

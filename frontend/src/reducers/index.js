@@ -17,13 +17,15 @@ import {
   NEW_POST_FAILURE,
   DELETE_POST,
   DELETE_COMMENT,
+  UPDATE_POST,
+  UPDATE_COMMENT,
 
   FETCH_COMMENTS_BEGIN,
   FETCH_COMMENTS_SUCCESS,
   FETCH_COMMENTS_FAILURE,
   POST_COMMENT_BEGIN,
   POST_COMMENT_SUCCESS,
-  POST_COMMENT_FAILURE,
+  POST_COMMENT_FAILURE
 } from '../actions'
 
 const initialState = {
@@ -87,6 +89,13 @@ function postsReducer(state = initialState, action) {
 
     case DELETE_POST:
       return state.items.post !== action.payload.post
+
+    case UPDATE_POST:
+      return {
+        ...state,
+        loading: false,
+        items: [...state.items, action.payload.data]
+      }
 
     case NEW_POST_BEGIN:
       return {
@@ -160,6 +169,13 @@ function commentsReducer(state = initialState, action) {
   switch (action.type) {
     case DELETE_COMMENT:
       return state.items.comments !== action.payload.comments
+
+    case UPDATE_COMMENT:
+      return {
+        ...state,
+        loading: false,
+        items: [...state.items, action.payload.data]
+      }
 
     case FETCH_COMMENTS_BEGIN:
       return {

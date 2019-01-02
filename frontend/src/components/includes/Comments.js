@@ -7,12 +7,11 @@ import Loading from './Loading'
 class Comments extends React.Component {
 
   componentDidMount() {
-    this.props.fetchComments( this.props.postId )
+    this.props.fetchComments( this.props.postId)
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
-        
     const formData = {}
     for (const field in this.refs) {
       formData[field] = this.refs[field].value
@@ -37,6 +36,8 @@ class Comments extends React.Component {
 
     if (loading) { return <Loading />}
 
+     console.log(comments)
+
     return (
       <React.Fragment>
         <ul className="nav nav-tabs">
@@ -50,7 +51,7 @@ class Comments extends React.Component {
                 <h4 className="media-heading text-uppercase reviews">{item.author}</h4>
                 <p>{item.body}</p>
                 <div className="text-muted">Commented on {moment(item.timestamp).format("MM/DD/YYYY")}</div>
-                <a className="editar" href="#">Editar</a>
+                <a className="editar" href={`/updatecomment/${item.id}`}>Editar</a>
                 <a href="#" onClick={() => this.deleteComment(item.id)}>Excluir</a>
               </div>
             )}

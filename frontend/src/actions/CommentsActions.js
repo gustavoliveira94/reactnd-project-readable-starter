@@ -18,6 +18,9 @@ export const POST_COMMENT_FAILURE = 'POST_COMMENT_FAILURE'
 // Delete Comment
 export const DELETE_COMMENT = 'DELETE_COMMENT'
 
+// Update Comment
+export const UPDATE_COMMENT = 'DELETE_COMMENT'
+
 export const fetchCommentsBegin = () => ({
   type: FETCH_COMMENTS_BEGIN
 });
@@ -100,6 +103,40 @@ export function deleteComment(id) {
       })
       .catch(error => {
         throw(error);
+      });
+  };
+};
+
+// Update Post
+
+export const updateCommentSuccess = (comments) => {
+  return {
+    type: UPDATE_COMMENT,
+    payload: {
+      comments
+    }
+  }
+}
+
+export function updateComment(formData, parentId, callback) {
+
+  const { id, body, author } = formData
+
+  const data = {
+    id,
+    parentId,
+    body,
+    author
+  }
+
+  return (dispatch) => {
+    return axios.put(`${API_ENDPOINT}/posts/${data.id}/comments`, data)
+    .then(res => {
+      callback(res.data)
+        dispatch(updateCommentSuccess(res.data))
+      })
+      .catch(error => {
+        throw (error);
       });
   };
 };

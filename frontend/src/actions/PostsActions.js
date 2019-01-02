@@ -26,6 +26,9 @@ export const NEW_POST_FAILURE = 'NEW_POST_FAILURE'
 // Delete post
 export const DELETE_POST = 'DELETE_POST'
 
+// Update post
+export const UPDATE_POST = 'UPDATE_POST'
+
 
 export const fetchPostsBegin = () => ({
   type: FETCH_POSTS_BEGIN
@@ -167,7 +170,42 @@ export function deletePost(id) {
         dispatch(deletePostSuccess(response.data))
       })
       .catch(error => {
-        throw(error);
+        throw (error);
+      });
+  };
+};
+
+// Update Post
+
+export const updatePostSuccess = (data) => {
+  return {
+    type: UPDATE_POST,
+    payload: {
+      data
+    }
+  }
+}
+
+export function updatePost(formData, callback) {
+
+  const { id, title, body, author, category } = formData
+
+  const data = {
+    id,
+    title,
+    body,
+    author,
+    category
+  }
+
+  return (dispatch) => {
+    return axios.put(`${API_ENDPOINT}/posts/${data.id}`, data)
+    .then(res => {
+      callback(res.data)
+        dispatch(updatePostSuccess(res.data))
+      })
+      .catch(error => {
+        throw (error);
       });
   };
 };
