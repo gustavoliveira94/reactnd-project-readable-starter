@@ -7,7 +7,7 @@ import NewPost from '../components/NewPost'
 import Post from '../components/Post'
 import Category from '../components/Category'
 import UpdatePost from '../components/UpdatePost'
-import UpdateComment from '../components/includes/UpdateComment';
+import UpdateComment from '../components/UpdateComment';
 
 class MainContainer extends React.Component {
 

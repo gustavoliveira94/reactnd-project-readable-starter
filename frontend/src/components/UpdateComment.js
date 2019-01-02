@@ -1,27 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import * as moment from 'moment-timezone'
-import { fetchComments, updateComment, fetchPostById } from '../../actions'
-import Loading from './Loading'
+import { fetchComments, updateComment, fetchPostById } from '../actions'
+import Loading from './includes/Loading'
 
-class UpdateComments extends React.Component {
-
-    state = {
-        postId: '',
-        commentId: ''
-    }
+class UpdateComment extends React.Component {
 
     componentDidMount() {
-        function getCommentId() {
-            this.setState({
-                postId: this.props.fetchComments(this.props.postId)
-            })
-        }
-        function getPostId() {
-            this.setState({
-                postId: this.props.fetchPostById(this.props.postId)
-            })
-        }
+        this.props.fetchComments(this.props.postId)
+        this.props.fetchPostById(this.props.postId)
     }
 
     handleSubmit = (e) => {
@@ -39,10 +25,6 @@ class UpdateComments extends React.Component {
         console.log('onPostSuccess')
     }
 
-    deleteComment = (id) => {
-        this.props.deleteComment(id)
-    }
-
     render() {
         const { comments, error, loading } = this.props
 
@@ -50,7 +32,7 @@ class UpdateComments extends React.Component {
 
         if (loading) { return <Loading /> }
 
-        console.log(comments)
+        console.log(this.props.postId)
 
         return (
             <React.Fragment>
@@ -89,4 +71,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UpdateComments);
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateComment);

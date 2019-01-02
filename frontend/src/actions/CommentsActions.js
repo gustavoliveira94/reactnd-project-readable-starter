@@ -38,7 +38,7 @@ export const fetchCommentsFailure = error => ({
 export function fetchComments(postId) {
   return dispatch => {
     dispatch(fetchCommentsBegin());
-    return fetch( `${API_ENDPOINT}/posts/${postId}/comments`, { headers: HEADERS })
+    return fetch(`${API_ENDPOINT}/posts/${postId}/comments`, { headers: HEADERS })
       .then(handleErrors)
       .then(res => res.json())
       .then(json => {
@@ -97,12 +97,12 @@ export const deleteCommentSuccess = id => {
 
 export function deleteComment(id) {
   return (dispatch) => {
-    return axios.delete (`${API_ENDPOINT}/comments/${id}`)
+    return axios.delete(`${API_ENDPOINT}/comments/${id}`)
       .then(response => {
         dispatch(deleteCommentSuccess(response.data))
       })
       .catch(error => {
-        throw(error);
+        throw (error);
       });
   };
 };
@@ -118,21 +118,20 @@ export const updateCommentSuccess = (comments) => {
   }
 }
 
-export function updateComment(formData, parentId, callback) {
+export function updateComment(formData, commentId, parentId, callback) {
 
-  const { id, body, author } = formData
+  const { body, author } = formData
 
   const data = {
-    id,
-    parentId,
+    id: commentId,
+    parentId: parentId,
     body,
     author
   }
 
   return (dispatch) => {
-    return axios.put(`${API_ENDPOINT}/posts/${data.id}/comments`, data)
-    .then(res => {
-      callback(res.data)
+    return axios.put(`${API_ENDPOINT}/comments/${data.id}`, data)
+      .then(res => {
         dispatch(updateCommentSuccess(res.data))
       })
       .catch(error => {
