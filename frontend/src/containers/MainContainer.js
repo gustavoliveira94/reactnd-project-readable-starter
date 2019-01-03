@@ -7,7 +7,6 @@ import NewPost from '../components/NewPost'
 import Post from '../components/Post'
 import Category from '../components/Category'
 import UpdatePost from '../components/UpdatePost'
-import UpdateComment from '../components/UpdateComment';
 
 class MainContainer extends React.Component {
 
@@ -19,7 +18,6 @@ class MainContainer extends React.Component {
         <Route exact path="/post/:categoryPath/:postId" component={Post} />
         <Route exact path="/category/:categoryPath" component={Category} />
         <Route exact path="/updatepost" component={UpdatePost} />
-        <Route exact path="/updatecomment/:commentId" component={UpdateComment} />
       </React.Fragment>
     )
   }
