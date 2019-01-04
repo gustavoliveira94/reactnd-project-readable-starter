@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Categories from './includes/Categories'
 import Header from '../components/includes/Header'
 import Nav from '../components/includes/Nav'
 import { fetchPostById, updatePost } from '../actions'
@@ -21,7 +20,7 @@ class UpdatePost extends React.Component {
     }
 
     onPutSuccess = (response) => {
-        this.props.history.push(`/post/${response.category}/${response.id}`);
+        this.props.history.push(`${response.category}/${response.id}`);
     }
 
     componentDidMount() {

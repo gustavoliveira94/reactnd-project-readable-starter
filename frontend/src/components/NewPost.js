@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Categories from './includes/Categories'
 import Header from '../components/includes/Header'
 import Nav from '../components/includes/Nav'
 import { newPost } from '../actions'
@@ -22,7 +21,7 @@ class NewPost extends React.Component {
   }
 
   onPostSuccess = (response) => {
-    this.props.history.push(`/post/${response.category}/${response.id}`);
+    this.props.history.push(`${response.category}/${response.id}`);
   }
 
 
@@ -64,9 +63,6 @@ class NewPost extends React.Component {
                 </div>
                 <button type="submit" className="btn btn-default comment">Post</button>
               </form>
-            </div>
-            <div className="col-sm-3 col-sm-offset-1 blog-sidebar">
-              <Categories/>
             </div>
           </div>
         </div>

@@ -4,7 +4,7 @@ import * as moment from 'moment-timezone'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Loading from '../includes/Loading'
-import { fetchPosts, sortPosts } from '../../actions'
+import { fetchPosts, sortPosts, votePost } from '../../actions'
 
 class Posts extends React.Component {
 
@@ -14,6 +14,10 @@ class Posts extends React.Component {
 
   sortBy = (key) => {
     this.props.sortPosts(key)
+  }
+
+  vote = (postId, value) => {
+    this.props.votePost(postId, value)
   }
 
   render() {
@@ -55,7 +59,7 @@ class Posts extends React.Component {
         { sortedPosts.map(post =>  
           <div className="blog-post" key={ `post-${post.id}` }>
             <Link to={ "/post/" + post.category + "/" + post.id } className="blog-post-title">{post.title}</Link>
-            <p className="text-muted"> {post.voteScore} votes | by {post.author} on {moment(post.timestamp).format("MM/DD/YYYY")} | {post.commentCount} comments</p>
+            <p className="text-muted"><button type="button" onClick={ () => this.vote(post.id, 'downVote') } className="btn btn-default"><i className="fa fa-caret-down" /></button> {post.voteScore} votes <button type="button" onClick={ () => this.vote(post.id, 'upVote') } className="btn btn-default"><i className="fa fa-caret-up" /></button> | by {post.author} on {moment(post.timestamp).format("MM/DD/YYYY")} | {post.commentCount} comments</p>     
             <hr/>
           </div>
         )}
@@ -76,7 +80,8 @@ function mapStateToProps ({ postsReducer, ownProps }) {
 function mapDispatchToProps (dispatch) {
   return {
     sortPosts: (sortByCriteria) => dispatch(sortPosts(sortByCriteria)),
-    fetchPosts: () => dispatch(fetchPosts())
+    fetchPosts: () => dispatch(fetchPosts()),
+    votePost: (postId, vote) => dispatch(votePost(postId, vote))
   }
 }
 
