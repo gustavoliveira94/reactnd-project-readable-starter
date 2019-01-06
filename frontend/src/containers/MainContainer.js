@@ -16,11 +16,10 @@ class MainContainer extends React.Component {
       <React.Fragment>
         <Route exact path="/" component={Home} />
         <Route exact path="/newpost" component={NewPost} />
-        <Route exact path="/post/:categoryPath/:postId" component={Post} />
-        <Route exact path="/category/:categoryPath" component={Category} />
+        <Route exact path="/:categoryPath/:postId" component={Post} />
+        <Route exact path="/:categoryPath" component={Category} />
         <Route exact path="/updatepost" component={UpdatePost} />
         <Route exact path="/404" component={NotFound} />
-        <Redirect from="*" to="/404"/>
       </React.Fragment>
     )
   }

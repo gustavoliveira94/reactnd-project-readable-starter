@@ -16,8 +16,8 @@ class Posts extends React.Component {
     this.props.sortPosts(key)
   }
 
-  vote = (postId, value) => {
-    this.props.votePost(postId, value)
+  vote = (id, value) => {
+    this.props.votePost(id, value)
   }
 
   render() {
@@ -56,10 +56,10 @@ class Posts extends React.Component {
         </form>
         <hr/>
 
-        { sortedPosts.map(post =>  
+        { sortedPosts.map(post =>
           <div className="blog-post" key={ `post-${post.id}` }>
-            <Link to={ "/post/" + post.category + "/" + post.id } className="blog-post-title">{post.title}</Link>
-            <p className="text-muted"><button type="button" onClick={ () => this.vote(post.id, 'downVote') } className="btn btn-default"><i className="fa fa-caret-down" /></button> {post.voteScore} votes <button type="button" onClick={ () => this.vote(post.id, 'upVote') } className="btn btn-default"><i className="fa fa-caret-up" /></button> | by {post.author} on {moment(post.timestamp).format("MM/DD/YYYY")} | {post.commentCount} comments</p>     
+            <Link to={ "/" + post.category + "/" + post.id } className="blog-post-title">{post.title}</Link>
+            <p className="text-muted"><a href="" onClick={() => this.vote(post.id, 'downVote') } className="btn btn-default"><i className="fa fa-caret-down" /></a> {post.voteScore} votes <a href="" onClick={ () => this.vote(post.id, 'upVote') } className="btn btn-default"><i className="fa fa-caret-up" /></a> | by {post.author} on {moment(post.timestamp).format("MM/DD/YYYY")} | {post.commentCount} comments</p>     
             <hr/>
           </div>
         )}
@@ -68,8 +68,9 @@ class Posts extends React.Component {
   }
 }
 
-function mapStateToProps ({ postsReducer, ownProps }) {
+function mapStateToProps ({ singlePostReducer, postsReducer, ownProps }) {
   return {
+    post: singlePostReducer.item,
     posts: postsReducer.items,
     sortByCriteria: postsReducer.sortByCriteria,
     loading: postsReducer.loading,

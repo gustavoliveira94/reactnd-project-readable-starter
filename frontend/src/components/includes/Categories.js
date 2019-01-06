@@ -20,7 +20,7 @@ class Categories extends React.Component {
         <ul className="list-unstyled">
           {categories.map(category =>
             <li key={category.name}>
-              <Link to={ `/category/${category.path}` }>{category.name}</Link>
+              <Link to={ "/" + `${category.path}` }>{category.name}</Link>
             </li>
           )}
         </ul>
