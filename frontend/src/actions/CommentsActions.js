@@ -19,7 +19,7 @@ export const POST_COMMENT_FAILURE = 'POST_COMMENT_FAILURE'
 export const DELETE_COMMENT = 'DELETE_COMMENT'
 
 // Update Comment
-export const UPDATE_COMMENT = 'DELETE_COMMENT'
+export const UPDATE_COMMENT = 'UPDATE_COMMENT'
 
 export const fetchCommentsBegin = () => ({
   type: FETCH_COMMENTS_BEGIN
@@ -125,11 +125,11 @@ export function voteComment(commentId, vote) {
 
 // Update Post
 
-export const updateCommentSuccess = (comments) => {
+export const updateCommentSuccess = (data) => {
   return {
     type: UPDATE_COMMENT,
     payload: {
-      comments
+      data
     }
   }
 }
