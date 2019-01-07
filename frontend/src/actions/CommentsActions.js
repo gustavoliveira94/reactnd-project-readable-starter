@@ -107,6 +107,22 @@ export function deleteComment(id) {
   };
 };
 
+// Vote
+export function voteComment(commentId, vote) {
+
+  const data = {
+    option: vote
+  }
+
+  return dispatch => {
+    axios.post(`${API_ENDPOINT}/comments/${commentId}`, data)
+      .then(res => {
+        dispatch(updateCommentSuccess(res.data))
+      })
+      .catch(error => dispatch(fetchCommentsFailure(error)))
+  }
+}
+
 // Update Post
 
 export const updateCommentSuccess = (comments) => {

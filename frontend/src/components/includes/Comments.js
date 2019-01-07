@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import * as moment from 'moment-timezone'
-import { fetchComments, postComment, deleteComment, updateComment } from '../../actions'
+import { fetchComments, postComment, deleteComment, updateComment, voteComment } from '../../actions'
 import Loading from './Loading'
 
 class Comments extends React.Component {
@@ -61,7 +61,12 @@ class Comments extends React.Component {
     })
   }
 
+  vote = (id, value) => {
+    this.props.voteComment(id, value)
+  }
+
   render() {
+
     const { comments, error, loading } = this.props
 
     if (error) { return <div>Error! {error.message}</div>; }
@@ -75,20 +80,23 @@ class Comments extends React.Component {
         <ul className="nav nav-tabs">
           <li className="active">Comments</li>
         </ul>
-
         <div className="tab-content">
-          <div className="tab-pane active">
-            {comments && comments.map((item, key) =>
-              <div className="well well-lg" key={`comment-${item.id}`}>
+          {comments && comments.map((item, key) =>
+            <div className="tab-pane active" key={`comment-${item.id}`}>
+              <div className="well well-lg">
                 <h4 className="media-heading text-uppercase reviews">{item.author}</h4>
                 <p>{item.body}</p>
+                <a href="" onClick={() => this.vote(item.id, 'downVote')} className="btn btn-default"><i className="fa fa-caret-down" /></a>
+                <button type="button" disabled className="btn btn-default">{item.voteScore}</button>
+                <a href="" onClick={() => this.vote(item.id, 'upVote')} className="btn btn-default"><i className="fa fa-caret-up" /></a>
                 <div className="text-muted">Commented on {moment(item.timestamp).format("MM/DD/YYYY")}</div>
                 <a className="editar" href="#" onClick={(id, k, author, body) => this.handleComment(item.id, key, item.author, item.body)}>Editar</a>
                 <a href="#" onClick={() => this.deleteComment(item.id)}>Excluir</a>
               </div>
-            )}
-          </div>
-          {this.state.visible === true &&
+            </div>
+          )}
+          {
+            this.state.visible === true &&
             <div className="well well-lg" key={comments[this.state.key].id}>
               <h3>Update Comment</h3>
               <form onSubmit={this.handleUpdate}>
@@ -137,6 +145,7 @@ function mapStateToProps({ commentsReducer }) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    voteComment: (commentId, vote) => dispatch(voteComment(commentId, vote)),
     fetchComments: (postId) => dispatch(fetchComments(postId)),
     deleteComment: (postId) => dispatch(deleteComment(postId)),
     postComment: (data, postId, callback) => dispatch(postComment(data, postId, callback)),
